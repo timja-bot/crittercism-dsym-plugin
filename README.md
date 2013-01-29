@@ -5,7 +5,7 @@ This Jenkins CI plugin allows for a post build step that uploads dSYM files via 
 used for symbolication of iOS binaries in Crittercism crash logs. As such, this plugin is only helpful for Mac OSX
 hosts.
 
-USING THE CRITTERCISM-DSYM-PLUGIN:
+**USING THE CRITTERCISM-DSYM-PLUGIN:**
 
 1. After installation, add a post-build step with the option 'Upload dSYM to Crittercism'.
 2. The plugin requires three fields:
@@ -18,7 +18,7 @@ The plugin may encounter the following errors while uploading the dSYM file:
 **Error 400**: There was a problem with the dSYM file.
 **Error 404**: App was not found or the given tokens are incorrect.
 
-Note: Depending on your configuration, the dSYM zip file generated in your build steps may be named something like
+**Note:** Depending on your configuration, the dSYM zip file generated in your build steps may be named something like
 'MyApp-1.0-dSYM.zip', where 1.0 is your version number and may change with each build. To make things easier for the
 post-build steps, you can rename your dSYM zip file to something static, such as 'MyApp-dsym.zip'. To accomplish this,
 add a build step that executes shell commands, such as:
@@ -26,7 +26,7 @@ add a build step that executes shell commands, such as:
       mv ${WORKSPACE}/build/*dSYM.zip ${WORKSPACE}/build/MyApp-dSYM.zip
 
 
-BUILDING THE CRITTERCISM-DSYM-PLUGIN:
+**BUILDING THE CRITTERCISM-DSYM-PLUGIN:**
 
 1. Ensure you have maven 2 installed.
 1. Check out the code with git.
@@ -34,10 +34,10 @@ BUILDING THE CRITTERCISM-DSYM-PLUGIN:
 3. To build, run 'mvn package'.
 4. To generate the *.hpi file, run 'mvn install'. The *.hpi file will be placed under the 'target' directory.
 
-EXTENDING THE CRITTERCISM-DSYM-PLUGIN:
+**EXTENDING THE CRITTERCISM-DSYM-PLUGIN:**
 
 If you'd like to contribute changes to the plugin, feel free to contact me via GitHub or message me on Twitter @mmh02.
 
-REFERENCES:
+**REFERENCES:**
 
 1. **Critter Compendium**: http://support.crittercism.com/customer/portal/articles/699971-uploading-dsym-files-via-api
