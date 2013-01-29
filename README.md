@@ -9,13 +9,13 @@ USING THE CRITTERCISM-DSYM-PLUGIN:
 
 1. After installation, add a post-build step with the option 'Upload dSYM to Crittercism'.
 2. The plugin requires three fields:
-    a. API Key - Retrieve this from Crittercism's app dashboard, under 'Settings'.
-    b. App ID - Also available from the Crittercism app 'Settings'.
-    c. dSYM zip file - Path to the dSYM zip file to be uploaded. You may use environment variables. Ex: '${WORKSPACE}/build/MyApp-dSYM.zip'.
+    a. *API Key* - Retrieve this from Crittercism's app dashboard, under 'Settings'.
+    b. *App ID* - Also available from the Crittercism app 'Settings'.
+    c. *dSYM zip* file - Path to the dSYM zip file to be uploaded. You may use environment variables. Ex: '${WORKSPACE}/build/MyApp-dSYM.zip'.
 
 The plugin may encounter the following errors while uploading the dSYM file:
-    * Error 400: There was a problem with the dSYM file.
-    * Error 404: App was not found or the given tokens are incorrect.
+    * *Error 400*: There was a problem with the dSYM file.
+    * *Error 404*: App was not found or the given tokens are incorrect.
 
 Note: Depending on your configuration, the dSYM zip file generated in your build steps may be named something like 'MyApp-1.0-dSYM.zip', where 1.0 is your version number and may change with each build. To make things easier for the post-build steps, you can rename your dSYM zip file to something static, such as 'MyApp-dsym.zip'. To accomplish this, add a build step that executes shell commands, such as:
 
