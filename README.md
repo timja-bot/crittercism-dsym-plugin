@@ -9,7 +9,7 @@ USING THE CRITTERCISM-DSYM-PLUGIN:
 
 1. After installation, add a post-build step with the option 'Upload dSYM to Crittercism'.
 2. The plugin requires three fields:
-    a. *API Key* - Retrieve this from Crittercism's app dashboard, under 'Settings'.
+    a. **API Key** - Retrieve this from Crittercism's app dashboard, under 'Settings'.
     b. *App ID* - Also available from the Crittercism app 'Settings'.
     c. *dSYM zip* file - Path to the dSYM zip file to be uploaded. You may use environment variables. Ex: '${WORKSPACE}/build/MyApp-dSYM.zip'.
 
