@@ -35,4 +35,5 @@ EXTENDING THE CRITTERCISM-DSYM-PLUGIN:
 If you'd like to contribute changes to the plugin, feel free to contact me via GitHub or message me on Twitter @mmh02.
 
 REFERENCES:
+
 1. Critter Compendium: http://support.crittercism.com/customer/portal/articles/699971-uploading-dsym-files-via-api
