@@ -88,7 +88,7 @@ public class CrittercismDsymRecorder extends Recorder
         	listener.getLogger().println(file);
         	
         	HttpClient httpClient = new DefaultHttpClient();
-        	HttpPost httpPost = new HttpPost("https://www.crittercism.com/api_beta/dsym/" + this.appID);
+        	HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + this.appID);
         	FileBody fileBody = new FileBody(file);
         	
         	MultipartEntity entity = new MultipartEntity();
