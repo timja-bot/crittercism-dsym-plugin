@@ -8,8 +8,27 @@
 
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>crittercism-dsym</artifactId>
-  <version>1.1</version>
+  <version>1.1-SNAPSHOT</version>
   <packaging>hpi</packaging>
+
+  <!-- Repository Info -->
+  <scm>
+  	<connection>scm:git:ssh://github.com/jenkinsci/crittercism-dsym-plugin.git</connection>
+	<developerConnection>scm:git:ssh://git@github.com/jenkinsci/crittercism-dsym-plugin.git</developerConnection>
+	<url>https://github.com/jenkinsci/crittercism-dsym-plugin</url>
+  </scm>
+
+  <!-- Wiki Info -->
+  <url>http://wiki.jenkins-ci.org/display/JENKINS/Crittercism+dSYM+Plugin</url>
+
+  <!-- Developer Info -->
+  <developers>
+  	<developer>
+		<id>mhassanpur</id>
+		<name>Mujtaba Hassanpur</name>
+		<email>mhassanpur@gmail.com</email>
+	</developer>
+  </developers>
 
   <!-- get every artifact through repo.jenkins-ci.org, which proxies all the artifacts that we need -->
   <repositories>
