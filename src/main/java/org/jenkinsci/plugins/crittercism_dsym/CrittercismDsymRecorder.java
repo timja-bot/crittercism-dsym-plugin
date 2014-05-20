@@ -24,23 +24,23 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.StaplerRequest;
 
-/**
- * Sample {@link Builder}.
- *
- * <p>
- * When the user configures the project and enables this builder,
- * {@link DescriptorImpl#newInstance(StaplerRequest)} is invoked
- * and a new {@link HelloWorldBuilder} is created. The created
- * instance is persisted to the project configuration XML by using
- * XStream, so this allows you to use instance fields (like {@link #name})
- * to remember the configuration.
- *
- * <p>
- * When a build is performed, the {@link #perform(AbstractBuild, Launcher, BuildListener)}
- * method will be invoked. 
- *
- * @author Kohsuke Kawaguchi
- */
+///**
+// * Sample {@link Builder}.
+// *
+// * <p>
+// * When the user configures the project and enables this builder,
+// * {@link DescriptorImpl#newInstance(StaplerRequest)} is invoked
+// * and a new {@link HelloWorldBuilder} is created. The created
+// * instance is persisted to the project configuration XML by using
+// * XStream, so this allows you to use instance fields (like {@link #name})
+// * to remember the configuration.
+// *
+// * <p>
+// * When a build is performed, the {@link #perform(AbstractBuild, Launcher, BuildListener)}
+// * method will be invoked.
+// *
+// * @author Kohsuke Kawaguchi
+// */
 public class CrittercismDsymRecorder extends Recorder
 {
     private final String apiKey;
@@ -83,37 +83,59 @@ public class CrittercismDsymRecorder extends Recorder
         listener.getLogger().println("Uploading dSYM to Crittercism...");
         try
         {
-        	EnvVars vars = build.getEnvironment(listener);
-        	File file = new File(vars.expand(filePath));
-        	listener.getLogger().println(file);
-        	
-        	HttpClient httpClient = new DefaultHttpClient();
-        	HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + this.appID);
-        	FileBody fileBody = new FileBody(file);
-        	
-        	MultipartEntity entity = new MultipartEntity();
-        	entity.addPart("key", new StringBody(this.apiKey));
-        	entity.addPart("dsym", fileBody);
-        	httpPost.setEntity(entity);
-        	
-        	HttpResponse response = httpClient.execute(httpPost);        	
-        	if(response.getStatusLine().getStatusCode() == 200)
-        	{
-        		// Successful
-        		listener.getLogger().println("Successfully uploaded dSYM file to Crittercism!");
-        	}
-        	else
-        	{
-        		// Error
-        		listener.getLogger().println("Failed to upload dSYM file to Crittercism - Error " + response.getStatusLine().getStatusCode() + ": " + response.getStatusLine().getReasonPhrase());
-        	}
+            CrittercismUploader.UploadRequest ur = uploadRequestBuilder();
+            EnvVars vars = build.getEnvironment(listener);
+
+            String workspace = vars.expand("$WORKSPACE");
+            RemoteRecorder remoteRecorder = new RemoteRecorder(workspace, ur, listener);
+            try {
+                Object result = launcher.getChannel().call(remoteRecorder);
+                //parsedMaps = (List<Map>) result;
+            } catch (UploadException ue) {
+                //listener.getLogger().println(Messages.TestflightRecorder_IncorrectResponseCode(ue.getStatusCode()));
+                listener.getLogger().println(ue.getResponseBody());
+                return false;
+            }
+//        	EnvVars vars = build.getEnvironment(listener);
+//        	File file = new File(vars.expand(filePath));
+//        	listener.getLogger().println(file);
+//
+//        	HttpClient httpClient = new DefaultHttpClient();
+//        	HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + this.appID);
+//        	FileBody fileBody = new FileBody(file);
+//
+//        	MultipartEntity entity = new MultipartEntity();
+//        	entity.addPart("key", new StringBody(this.apiKey));
+//        	entity.addPart("dsym", fileBody);
+//        	httpPost.setEntity(entity);
+//
+//        	HttpResponse response = httpClient.execute(httpPost);
+//        	if(response.getStatusLine().getStatusCode() == 200)
+//        	{
+//        		// Successful
+//        		listener.getLogger().println("Successfully uploaded dSYM file to Crittercism!");
+//        	}
+//        	else
+//        	{
+//        		// Error
+//        		listener.getLogger().println("Failed to upload dSYM file to Crittercism - Error " + response.getStatusLine().getStatusCode() + ": " + response.getStatusLine().getReasonPhrase());
+//        	}
         }
-        catch(Exception e)
-        {
-        	listener.getLogger().println(e);
+        catch (Throwable e) {
+            listener.getLogger().println(e);
+            e.printStackTrace(listener.getLogger());
+            return false;
         }
         
         return true;
+    }
+
+    private CrittercismUploader.UploadRequest uploadRequestBuilder(){
+        CrittercismUploader.UploadRequest ur = new CrittercismUploader.UploadRequest();
+        ur.apiKey = this.apiKey;
+        ur.dsymPath = this.filePath;
+        ur.appId = this.appID;
+        return ur;
     }
 
     // Overridden for better type safety.
