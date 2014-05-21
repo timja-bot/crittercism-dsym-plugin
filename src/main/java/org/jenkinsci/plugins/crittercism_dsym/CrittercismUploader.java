@@ -46,7 +46,9 @@ public class CrittercismUploader implements Serializable {
         }
     }
 
-
+    /**
+     * Makes httpPost call to upload dSYM to crittercism
+     */
     public void upload(UploadRequest ur, BuildListener listener) throws IOException, org.json.simple.parser.ParseException {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + ur.appId);
@@ -70,6 +72,7 @@ public class CrittercismUploader implements Serializable {
         if (statusCode != 200) {
             String responseBody = new Scanner(is).useDelimiter("\\A").next();
 
+            listener.getLogger().println("Failed to upload dSYM file to Crittercism - Error ");
             listener.getLogger().println(responseBody);
             listener.getLogger().println(response);
 

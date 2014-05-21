@@ -8,21 +8,10 @@ import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
 import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.BuildStepMonitor;
-import hudson.tasks.Builder;
 import hudson.tasks.Publisher;
 import hudson.tasks.Recorder;
 
-import java.io.File;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.kohsuke.stapler.DataBoundConstructor;
-import org.kohsuke.stapler.StaplerRequest;
 
 ///**
 // * Sample {@link Builder}.
@@ -58,26 +47,28 @@ public class CrittercismDsymRecorder extends Recorder
 
     public String getApiKey()
     {
-    	return this.apiKey;
+        return this.apiKey;
     }
 
     public String getAppID()
     {
-    	return this.appID;
+        return this.appID;
     }
 
     public String getFilePath()
     {
-    	return this.filePath;
+        return this.filePath;
     }
-
+    /*
+     * Uses Callable remote recorder to post dSYM to crittercism
+     */
     @Override
     public boolean perform(AbstractBuild build, Launcher launcher, BuildListener listener)
     {
         if(build.getResult().isWorseOrEqualTo(Result.FAILURE))
         {
-        	// Build failed
-        	return false;
+            // Build failed
+            return false;
         }
         
         listener.getLogger().println("Uploading dSYM to Crittercism...");
@@ -104,7 +95,9 @@ public class CrittercismDsymRecorder extends Recorder
         
         return true;
     }
-
+    /*
+     * Adds api key, dsym path and appid to Upload Request
+     */
     private CrittercismUploader.UploadRequest uploadRequestBuilder(EnvVars vars){
         CrittercismUploader.UploadRequest ur = new CrittercismUploader.UploadRequest();
         ur.apiKey = this.apiKey;
@@ -152,8 +145,8 @@ public class CrittercismDsymRecorder extends Recorder
         }
     }
 
-	public BuildStepMonitor getRequiredMonitorService() {
-		return BuildStepMonitor.NONE;
-	}
+    public BuildStepMonitor getRequiredMonitorService() {
+        return BuildStepMonitor.NONE;
+    }
 }
 

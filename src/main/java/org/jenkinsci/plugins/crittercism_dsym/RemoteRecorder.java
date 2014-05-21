@@ -10,6 +10,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
 
+    /*
+     * Implements Callable to hide the master/slave distinction.
+     * Finds dSYM file
+     * Uses CrittercismUploader to upload dSYM to crittercism
+     */
 public class RemoteRecorder implements Callable<Object, Throwable>, Serializable {
     final private String remoteWorkspace;
     final private CrittercismUploader.UploadRequest uploadRequest;
@@ -21,22 +26,28 @@ public class RemoteRecorder implements Callable<Object, Throwable>, Serializable
         this.listener = listener;
     }
 
+    /*
+     * Create Crittercism Uploader and upload dSYM
+     */
     public Object call() throws Throwable {
         CrittercismUploader uploader = new CrittercismUploader();
         return uploadWith(uploader);
     }
 
+    /*
+     * Get dSYM file and add it to UploadRequest
+     * Make call to Crittercism uploader to upload dSYM to crittercism
+     */
     List<Map> uploadWith(CrittercismUploader uploader) throws Throwable {
         List<Map> results = new ArrayList<Map>();
+        HashMap result = new HashMap();
 
-            HashMap result = new HashMap();
+        CrittercismUploader.UploadRequest ur = CrittercismUploader.UploadRequest.copy(uploadRequest);
+        ur.dsymFile = identifyDsym(ur.dsymPath);
+        listener.getLogger().println("DSYM: " + ur.dsymFile);
+        uploader.upload(ur, listener);
 
-            CrittercismUploader.UploadRequest ur = CrittercismUploader.UploadRequest.copy(uploadRequest);
-            ur.dsymFile = identifyDsym(ur.dsymPath);
-            listener.getLogger().println("DSYM: " + ur.dsymFile);
-            uploader.upload(ur, listener);
-
-            results.add(result);
+        results.add(result);
         return results;
     }
 
@@ -46,9 +57,9 @@ public class RemoteRecorder implements Callable<Object, Throwable>, Serializable
         File dsymFile;
         if (filePath != null && !filePath.trim().isEmpty()) {
             dsymFile = findAbsoluteOrRelativeFile(filePath);
-            if (dsymFile == null)
+            if (dsymFile == null) {
                 throw new IllegalArgumentException("Couldn't find file " + filePath + " in workspace " + remoteWorkspace);
-
+            }
         } else {
             //String fileName = FilenameUtils.removeExtension(ipaName);
             File f = new File(filePath);
@@ -58,15 +69,16 @@ public class RemoteRecorder implements Callable<Object, Throwable>, Serializable
                 f = new File(filePath);
                 if (f.exists()) {
                     dsymFile = f;
-                } else
+                } else {
                     dsymFile = null;
+                }
             }
         }
         return dsymFile;
     }
 
     /*
-      * Finds a file that is absolute or relative to either the current direectory or the remoteWorkspace
+     * Finds a file that is absolute or relative to either the current directory or the remoteWorkspace
      */
     private File findAbsoluteOrRelativeFile(String path) {
         File f = new File(path);
