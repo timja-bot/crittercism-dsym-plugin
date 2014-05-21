@@ -2,35 +2,23 @@ package org.jenkinsci.plugins.crittercism_dsym;
 import hudson.model.BuildListener;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.simple.parser.JSONParser;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.client.HttpClient;
 
 import java.io.*;
-import java.nio.charset.Charset;
-import java.util.Map;
 import java.util.Scanner;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
- * A testflight uploader
+ * A crittercism uploader
  */
 public class CrittercismUploader implements Serializable {
-    static interface Logger {
-        void logDebug(String message);
-    }
 
     static class UploadRequest implements Serializable {
         String dsymPath;
@@ -58,17 +46,12 @@ public class CrittercismUploader implements Serializable {
         }
     }
 
-    private Logger logger = null;
 
-    public void setLogger(Logger logger) {
-        this.logger = logger;
-    }
-
-    public Map upload(UploadRequest ur, BuildListener listener) throws IOException, org.json.simple.parser.ParseException {
+    public void upload(UploadRequest ur, BuildListener listener) throws IOException, org.json.simple.parser.ParseException {
         HttpClient httpClient = new DefaultHttpClient();
-
         HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + ur.appId);
         MultipartEntity entity = new MultipartEntity();
+
         entity.addPart("key", new StringBody(ur.apiKey));
 
         if (ur.dsymFile != null) {
@@ -77,15 +60,11 @@ public class CrittercismUploader implements Serializable {
         }
 
         httpPost.setEntity(entity);
-
-        logDebug("POST Request: " + ur);
-
         HttpResponse response = httpClient.execute(httpPost);
         HttpEntity resEntity = response.getEntity();
 
         InputStream is = resEntity.getContent();
 
-        // Improved error handling.
         int statusCode = response.getStatusLine().getStatusCode();
         listener.getLogger().println(statusCode);
         if (statusCode != 200) {
@@ -96,21 +75,6 @@ public class CrittercismUploader implements Serializable {
 
             throw new UploadException(statusCode, responseBody, response);
         }
-
-        StringWriter writer = new StringWriter();
-        IOUtils.copy(is, writer, "UTF-8");
-        String json = writer.toString();
-
-        logDebug("POST Answer: " + json);
-
-        JSONParser parser = new JSONParser();
-
-        return null;
     }
 
-    private void logDebug(String message) {
-        if (logger != null) {
-            logger.logDebug(message);
-        }
-    }
 }

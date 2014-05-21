@@ -60,12 +60,12 @@ public class CrittercismDsymRecorder extends Recorder
     {
     	return this.apiKey;
     }
-    
+
     public String getAppID()
     {
     	return this.appID;
     }
-    
+
     public String getFilePath()
     {
     	return this.filePath;
@@ -96,30 +96,7 @@ public class CrittercismDsymRecorder extends Recorder
                 listener.getLogger().println(ue.getResponseBody());
                 return false;
             }
-//        	EnvVars vars = build.getEnvironment(listener);
-//        	File file = new File(vars.expand(filePath));
-//        	listener.getLogger().println(file);
-//
-//        	HttpClient httpClient = new DefaultHttpClient();
-//        	HttpPost httpPost = new HttpPost("https://app.crittercism.com/api_beta/dsym/" + this.appID);
-//        	FileBody fileBody = new FileBody(file);
-//
-//        	MultipartEntity entity = new MultipartEntity();
-//        	entity.addPart("key", new StringBody(this.apiKey));
-//        	entity.addPart("dsym", fileBody);
-//        	httpPost.setEntity(entity);
-//
-//        	HttpResponse response = httpClient.execute(httpPost);
-//        	if(response.getStatusLine().getStatusCode() == 200)
-//        	{
-//        		// Successful
-//        		listener.getLogger().println("Successfully uploaded dSYM file to Crittercism!");
-//        	}
-//        	else
-//        	{
-//        		// Error
-//        		listener.getLogger().println("Failed to upload dSYM file to Crittercism - Error " + response.getStatusLine().getStatusCode() + ": " + response.getStatusLine().getReasonPhrase());
-//        	}
+
         }
         catch (Throwable e) {
             listener.getLogger().println(e);
