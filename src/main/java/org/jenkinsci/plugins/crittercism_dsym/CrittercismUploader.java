@@ -74,6 +74,8 @@ public class CrittercismUploader implements Serializable {
             listener.getLogger().println(response);
 
             throw new UploadException(statusCode, responseBody, response);
+        }else{
+            listener.getLogger().println("successfully uploaded dSYM to Crittercism");
         }
     }
 

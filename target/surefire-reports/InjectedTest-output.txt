@@ -1,58 +1,58 @@
 Picking up existing exploded jenkins.war at /Users/distefanon1/Development/crittercism-dsym-plugin/./target/jenkins-for-test
-May 20, 2014 1:48:36 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:49 AM org.mortbay.log.Slf4jLog info
 INFO: Logging to org.slf4j.impl.JDK14LoggerAdapter(org.mortbay.log) via org.mortbay.log.Slf4jLog
-May 20, 2014 1:48:36 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:49 AM org.mortbay.log.Slf4jLog info
 INFO: jetty-6.1.26
-May 20, 2014 1:48:36 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:49 AM org.mortbay.log.Slf4jLog info
 INFO: NO JSP Support for , did not find org.apache.jasper.servlet.JspServlet
-May 20, 2014 1:48:36 PM org.mortbay.log.Slf4jLog info
-INFO: Started SocketConnector@0.0.0.0:55938
-May 20, 2014 1:48:36 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:49 AM org.mortbay.log.Slf4jLog info
+INFO: Started SocketConnector@0.0.0.0:50566
+May 21, 2014 9:00:49 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Started initialization
-May 20, 2014 1:48:41 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:53 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Listed all plugins
-May 20, 2014 1:48:41 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:53 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Prepared all plugins
-May 20, 2014 1:48:41 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:53 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Started all plugins
-May 20, 2014 1:48:41 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:53 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Augmented all extensions
-May 20, 2014 1:48:41 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:53 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Loaded all jobs
-May 20, 2014 1:48:42 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:55 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Completed initialization
-May 20, 2014 1:48:42 PM hudson.TcpSlaveAgentListener <init>
-INFO: JNLP slave agent listener started on TCP port 55939
+May 21, 2014 9:00:55 AM hudson.TcpSlaveAgentListener <init>
+INFO: JNLP slave agent listener started on TCP port 50568
 Effective SlaveRestarter on master: null
-May 20, 2014 1:48:42 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:56 AM org.mortbay.log.Slf4jLog info
 INFO: jetty-6.1.26
-May 20, 2014 1:48:42 PM org.mortbay.log.Slf4jLog info
-INFO: Started SocketConnector@0.0.0.0:55940
-May 20, 2014 1:48:43 PM org.mortbay.log.Slf4jLog info
-INFO: Stopped SocketConnector@0.0.0.0:55938
-May 20, 2014 1:48:43 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:56 AM org.mortbay.log.Slf4jLog info
+INFO: Started SocketConnector@0.0.0.0:50569
+May 21, 2014 9:00:57 AM org.mortbay.log.Slf4jLog info
+INFO: Stopped SocketConnector@0.0.0.0:50566
+May 21, 2014 9:00:57 AM org.mortbay.log.Slf4jLog info
 INFO: jetty-6.1.26
-May 20, 2014 1:48:43 PM org.mortbay.log.Slf4jLog info
+May 21, 2014 9:00:57 AM org.mortbay.log.Slf4jLog info
 INFO: NO JSP Support for , did not find org.apache.jasper.servlet.JspServlet
-May 20, 2014 1:48:43 PM org.mortbay.log.Slf4jLog info
-INFO: Started SocketConnector@0.0.0.0:55942
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM org.mortbay.log.Slf4jLog info
+INFO: Started SocketConnector@0.0.0.0:50571
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Started initialization
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Listed all plugins
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Prepared all plugins
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Started all plugins
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Augmented all extensions
-May 20, 2014 1:48:43 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Loaded all jobs
-May 20, 2014 1:48:44 PM jenkins.InitReactorRunner$1 onAttained
+May 21, 2014 9:00:57 AM jenkins.InitReactorRunner$1 onAttained
 INFO: Completed initialization
-May 20, 2014 1:48:44 PM hudson.TcpSlaveAgentListener <init>
-INFO: JNLP slave agent listener started on TCP port 55943
+May 21, 2014 9:00:57 AM hudson.TcpSlaveAgentListener <init>
+INFO: JNLP slave agent listener started on TCP port 50572
 Effective SlaveRestarter on master: null
 === Starting CliSanityTest.testCliSanity
-May 20, 2014 1:48:44 PM org.mortbay.log.Slf4jLog info
-INFO: Stopped SocketConnector@0.0.0.0:55942
+May 21, 2014 9:00:57 AM org.mortbay.log.Slf4jLog info
+INFO: Stopped SocketConnector@0.0.0.0:50571

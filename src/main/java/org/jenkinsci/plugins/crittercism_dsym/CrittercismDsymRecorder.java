@@ -83,8 +83,8 @@ public class CrittercismDsymRecorder extends Recorder
         listener.getLogger().println("Uploading dSYM to Crittercism...");
         try
         {
-            CrittercismUploader.UploadRequest ur = uploadRequestBuilder();
             EnvVars vars = build.getEnvironment(listener);
+            CrittercismUploader.UploadRequest ur = uploadRequestBuilder(vars);
 
             String workspace = vars.expand("$WORKSPACE");
             RemoteRecorder remoteRecorder = new RemoteRecorder(workspace, ur, listener);
@@ -105,10 +105,10 @@ public class CrittercismDsymRecorder extends Recorder
         return true;
     }
 
-    private CrittercismUploader.UploadRequest uploadRequestBuilder(){
+    private CrittercismUploader.UploadRequest uploadRequestBuilder(EnvVars vars){
         CrittercismUploader.UploadRequest ur = new CrittercismUploader.UploadRequest();
         ur.apiKey = this.apiKey;
-        ur.dsymPath = this.filePath;
+        ur.dsymPath = vars.expand(this.filePath);
         ur.appId = this.appID;
         return ur;
     }
