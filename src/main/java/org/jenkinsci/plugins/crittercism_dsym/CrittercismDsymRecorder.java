@@ -90,9 +90,7 @@ public class CrittercismDsymRecorder extends Recorder
             RemoteRecorder remoteRecorder = new RemoteRecorder(workspace, ur, listener);
             try {
                 Object result = launcher.getChannel().call(remoteRecorder);
-                //parsedMaps = (List<Map>) result;
             } catch (UploadException ue) {
-                //listener.getLogger().println(Messages.TestflightRecorder_IncorrectResponseCode(ue.getStatusCode()));
                 listener.getLogger().println(ue.getResponseBody());
                 return false;
             }

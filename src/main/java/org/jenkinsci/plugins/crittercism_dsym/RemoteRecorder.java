@@ -2,16 +2,12 @@ package org.jenkinsci.plugins.crittercism_dsym;
 
 import hudson.model.BuildListener;
 import hudson.remoting.Callable;
-import hudson.Util;
 
 import java.io.File;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class RemoteRecorder implements Callable<Object, Throwable>, Serializable {
@@ -37,9 +33,7 @@ public class RemoteRecorder implements Callable<Object, Throwable>, Serializable
 
             CrittercismUploader.UploadRequest ur = CrittercismUploader.UploadRequest.copy(uploadRequest);
             ur.dsymFile = identifyDsym(ur.dsymPath);
-
-                listener.getLogger().println("DSYM: " + ur.dsymFile);
-
+            listener.getLogger().println("DSYM: " + ur.dsymFile);
             uploader.upload(ur, listener);
 
             results.add(result);
